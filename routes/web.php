@@ -1,13 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
-//use Illuminate\Support\Facades\Auth;
-
-Route::get('/', function () {
-    return view('welcome');
+// Fallback for admin routes
+Route::fallback(function () {
+    if (Auth::check()) {
+        // Logged-in user: any unmatched /admin/* goes to dashboard
+        return redirect()->route('admin.dashboard');
+    }
+    // Logged-out user: redirect to login page (/admin)
+    return redirect()->route('login');
 });
 
-//Auth::routes();
+// Load admin routes
+require __DIR__.'/admin.php';
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth routes (login, register, etc.)
+require __DIR__.'/auth.php';

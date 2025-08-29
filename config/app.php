@@ -123,4 +123,10 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aliases' => [
+    'App' => Illuminate\Support\Facades\App::class,
+    'Artisan' => Illuminate\Support\Facades\Artisan::class,
+    // other aliases
+    'PDF' => Barryvdh\DomPDF\Facade\Pdf::class, // <-- ensure the class ends with ::class
+    ],
 ];

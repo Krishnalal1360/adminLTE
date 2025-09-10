@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('adminlte/fontawesome/css/all.min.css') }}">
     <!-- AdminLTE -->
     <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
+    <!-- Summernote-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -29,10 +31,18 @@
     @include('admin.layouts.footer')
 </div>
 
-<!-- Scripts -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+<!-- Bootstrap (with Popper included) -->
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- AdminLTE -->
 <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
+
+<!-- Summernote JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+
 @stack('scripts')
 </body>
 </html>

@@ -8,7 +8,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('logout.user') }}">
                 @csrf
                 <button type="submit" class="nav-link btn btn-link text-danger" style="display:inline;">
                     <i class="fas fa-sign-out-alt"></i> Logout

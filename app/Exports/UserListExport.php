@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Admin\UserListModel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -20,9 +19,9 @@ class UserListExport implements FromCollection, WithHeadings
         return $this->userLists->map(function ($user) {
             return [
                 'ID'       => $user->id,
-                'Name'     => $user->name,
-                'Email'    => $user->email,
-                'Password' => $user->password,
+                'Title'     => $user->name,
+                'Description'    => $user->email,
+                'File' => $user->password,
             ];
         });
     }

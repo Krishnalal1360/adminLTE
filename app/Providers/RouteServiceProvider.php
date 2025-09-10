@@ -7,43 +7,30 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel Breeze and other authentication services
-     * to redirect users after login/registration.
-     */
-    public const HOME = '/admin/dashboard';  // <-- add here
+    public const HOME = '/admin/dashboard';
 
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         $this->routes(function () {
+            // Web routes (session + CSRF)
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
+            // API routes (stateless)
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            // Admin routes
-            /*Route::middleware('web')
-                ->prefix('admin')
-                ->group(base_path('routes/admin.php'));*/
-
-            Route::middleware('auth')
-                ->prefix('admin')
-                ->group(base_path('routes/admin.php'));
+            // Admin routes (web + auth) — can also be included inside web.php if you want
+            // Comment this out if admin routes are already loaded in web.php
+            Route::middleware(['web', 'auth'])
+                 ->prefix('admin')
+                 ->group(base_path('routes/admin.php'));
         });
     }
 }

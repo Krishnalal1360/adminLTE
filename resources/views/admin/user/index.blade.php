@@ -17,11 +17,6 @@
                 <div class="col-sm-6">
                     <h1>User List</h1>
                 </div>
-                <div class="col-sm-6">
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary float-right">
-                        <i class="fas fa-user-plus"></i> Create New User
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -37,16 +32,13 @@
 
                 <script>
                     setTimeout(() => {
-                    location.reload();
+                        location.reload();
                     }, 3000);
                 </script>
             @endif
 
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <!--
-                    <h3 class="card-title">Users</h3>
-                    -->
                     <div class="btn-group">
                         <a href="{{ route('admin.user.export', 'pdf') }}" class="btn btn-danger btn-sm">
                             <i class="fas fa-file-pdf"></i> PDF
@@ -67,9 +59,11 @@
                     <table class="table table-bordered table-hover mb-0">
                         <thead class="thead-light">
                             <tr>
-                                <th style="width: 60px;">ID</th>
+                                <th style="width: 60px;">#</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Password</th>
+                                <th>Message</th>
                                 <th style="width: 150px;">Actions</th>
                             </tr>
                         </thead>
@@ -80,6 +74,9 @@
                                 <td>{{ $i }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <!-- Show masked password since original can't be displayed -->
+                                <td>********</td> 
+                                <td>{{ $user->message ?? 'N/A' }}</td>
                                 <td>
                                     <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-info">
                                         <i class="fas fa-edit"></i>
@@ -96,7 +93,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="text-center">No users found.</td>
+                                <td colspan="6" class="text-center">No users found.</td>
                             </tr>
                             @endforelse
                         </tbody>

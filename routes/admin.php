@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CMS\CMSController;
 
 // Protected admin routes
@@ -16,16 +17,29 @@ Route::middleware(['auth'])
             ->name('admin.dashboard');
 
         // -------------------
+        // Profile Routes
+        // -------------------
+        Route::get('/profile', [ProfileController::class, 'index'])
+            ->name('admin.profile.index');
+
+        // Edit profile
+        /*Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])
+            ->name('admin.profile.edit');*/
+
+        Route::put('/profile/{id}/update', [ProfileController::class, 'update'])
+            ->name('admin.profile.update');
+
+        // -------------------
         // User Routes
         // -------------------
         Route::get('/user', [UserController::class, 'index'])
             ->name('admin.user.index');
 
-        Route::get('/user/create', [UserController::class, 'create'])
+        /*Route::get('/user/create', [UserController::class, 'create'])
             ->name('admin.user.create');
 
         Route::post('/user', [UserController::class, 'store'])
-            ->name('admin.user.store');
+            ->name('admin.user.store');*/
 
         Route::get('/user/{id}/edit', [UserController::class, 'edit'])
             ->name('admin.user.edit');
@@ -63,34 +77,20 @@ Route::middleware(['auth'])
         Route::get('/blog/export/{type}', [BlogController::class, 'export'])
             ->name('admin.blog.export');
     });
-
-
         // -------------------
         // CMS Routes
         // -------------------
         Route::get('/home', [CMSController::class, 'home'])
-            ->name('admin.cms.home');
+            ->name('cms.home');
 
         Route::get('/blogs', [CMSController::class, 'index'])
-            ->name('admin.cms.index');
+            ->name('cms.index');
 
         Route::get('/blog/{id}', [CMSController::class, 'show'])
-            ->name('admin.cms.show');
+            ->name('cms.show');
 
-        Route::get('/cms/blog/create', [CMSController::class, 'create'])
-            ->name('admin.cms.create');
+        Route::get('/contact', [CMSController::class, 'create'])
+            ->name('cms.contact.create');
 
-        Route::post('/cms/blog/store', [CMSController::class, 'store'])
-            ->name('admin.cms.store');
-
-        /*Route::get('/cms/blog/{id}/edit', [CMSController::class, 'edit'])
-            ->name('admin.cms.edit');
-
-        Route::put('/cms/blog/{id}/update', [CMSController::class, 'update'])
-            ->name('admin.cms.update');
-
-        Route::delete('/cms/{id}/destroy', [CMSController::class, 'destroy'])
-            ->name('admin.cms.destroy');
-
-        Route::get('/cms/export/{type}', [CMSController::class, 'export'])
-            ->name('admin.cms.export');*/
+        Route::post('/contact-store', [CMSController::class, 'contactStore'])
+            ->name('cms.contact.store');

@@ -59,9 +59,11 @@
                     <a href="{{ route('admin.blog.export', 'csv') }}" class="btn btn-warning btn-sm text-white">
                         <i class="fas fa-file-csv"></i> CSV
                     </a>
+                    {{--  
                     <a href="{{ route('admin.blog.export', 'print') }}" target="_blank" class="btn btn-secondary btn-sm">
                         <i class="fas fa-print"></i> Print
                     </a>
+                    --}}
                 </div>
             </div>
 

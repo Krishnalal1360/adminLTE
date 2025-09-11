@@ -10,16 +10,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {{ $currentPage == 'home' ? 'active' : '' }}" href="{{ route('admin.cms.home') }}">Home</a>
+                    <a class="nav-link {{ $currentPage == 'home' ? 'active' : '' }}" href="{{ route('cms.home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $currentPage == 'blog' ? 'active' : '' }}" href="{{ route('admin.cms.index') }}">Blog</a>
+                    <a class="nav-link {{ $currentPage == 'blog' ? 'active' : '' }}" href="{{ route('cms.index') }}">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ $currentPage == 'about' ? 'active' : '' }} disabled" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $currentPage == 'contact' ? 'active' : '' }}" href="{{ route('admin.cms.create') }}">Contact</a>
+                    <a class="nav-link {{ $currentPage == 'contact' ? 'active' : '' }}" href="{{ route('cms.contact.create') }}">Contact</a>
                 </li>
             </ul>
         </div>

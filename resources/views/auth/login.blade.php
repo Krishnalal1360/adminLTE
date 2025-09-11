@@ -1,10 +1,24 @@
+@php
+    $admin = \App\Models\Admin\UserModel::first(); // assuming only one record
+@endphp
+
 <x-guest-layout>
+    <!-- Admin Image -->
+    @if($admin && $admin->image)
+        <div class="text-center mb-4">
+            <img src="{{ asset('storage/' . $admin->image) }}" 
+                 alt="Admin Image" 
+                 class="rounded-full mx-auto"
+                 width="120" 
+                 height="120">
+        </div>
+    @endif
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -15,12 +29,10 @@
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 

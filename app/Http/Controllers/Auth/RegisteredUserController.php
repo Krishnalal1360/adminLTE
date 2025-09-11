@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -29,23 +30,40 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Validate incoming request including the Role field and optional image
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.UserModel::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . UserModel::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'integer', 'in:1,2'], // only Admin or User
+            'image' => ['nullable', 'image', 'max:2048'], // optional image upload
         ]);
 
-        $user = UserModel::create([
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 1,
-        ]);
+            'role' => $request->role,
+        ];
 
+        // Handle image upload if present
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('profile_images', $filename, 'public');
+            $data['image'] = $path;
+        }
+
+        // Create the user
+        $user = UserModel::create($data);
+
+        // Fire the Registered event
         event(new Registered($user));
 
+        // Log in the user immediately
         Auth::login($user);
 
-        return redirect(route('admin.dashboard', absolute: false));
+        // Redirect to intended page or default HOME
+        return redirect()->intended(\App\Providers\RouteServiceProvider::HOME);
     }
 }

@@ -128,4 +128,15 @@ return [
     // other aliases
     'PDF' => Barryvdh\DomPDF\Facade\Pdf::class, // <-- ensure the class ends with ::class
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | API Base URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL will be used by controllers when making internal API calls.
+    |
+    */
+
+    'api_url' => env('API_URL', env('APP_URL')),
 ];

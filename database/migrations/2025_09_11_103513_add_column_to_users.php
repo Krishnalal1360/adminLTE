@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
-            $table->renameColumn('status', 'role');
+            // Add 'image' column to store file path, nullable
+            $table->string('image')->after('password');
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
-            $table -> dropColumn('role');
+            $table->dropColumn('image');
         });
     }
 };
+

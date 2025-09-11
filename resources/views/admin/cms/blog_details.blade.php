@@ -28,7 +28,7 @@
         </div>
 
         <div class="card-footer text-right">
-            <a href="{{ route('admin.cms.index') }}" class="btn btn-secondary">Back to Blogs</a>
+            <a href="{{ route('cms.index') }}" class="btn btn-secondary">Back to Blogs</a>
         </div>
     </div>
 @endsection

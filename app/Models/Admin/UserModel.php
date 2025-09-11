@@ -20,20 +20,20 @@ class UserModel extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'role',       // 1 => Admin, 2 => User
+        'image',      // store file path for profile image
     ];
 
     // Hidden fields in serialization
     protected $hidden = [
         'password',
         'remember_token',
-        'role',
     ];
 
-    // Attribute casting (Laravel 12 compatible)
+    // Attribute casting
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // remove 'password' => 'hashed' for Laravel 12
+        // Laravel 12: do not cast password as hashed automatically
     ];
 
     // Factory

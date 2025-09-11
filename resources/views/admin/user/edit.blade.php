@@ -9,7 +9,7 @@
             
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">User Information</h3>
+                    <h3 class="card-title">User Details</h3>
                 </div>
 
                 <!-- Form Start -->
@@ -37,7 +37,8 @@
                             <input type="email"
                                    name="email"
                                    value="{{ old('email', $userList->email) }}"
-                                   class="form-control @error('email') is-invalid @enderror">
+                                   class="form-control @error('email') is-invalid @enderror"
+                                   placeholder="Enter email">
                             @error('email')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -57,11 +58,22 @@
                             @enderror
                         </div>
 
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea name="message"
+                                      class="form-control @error('message') is-invalid @enderror"
+                                      rows="4"
+                                      placeholder="Enter message">{{ old('message', $userList->message) }}</textarea>
+                            @error('message')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">
-                            <i class="fas fa-save"></i> Update User
+                            <i class="fas fa-save"></i> Update
                         </button>
                         <a href="{{ route('admin.user.index') }}" class="btn btn-secondary ml-2">
                             Cancel

@@ -19,27 +19,15 @@
                 </li>
 
                 <!-- Profile -->
-                {{--  
                 <li class="nav-item">
-                    <a href="{{ route('admin.profile') }}" 
-                       class="nav-link {{ request()->routeIs('admin.profile') ? 'active' : '' }}">
+                    <a href="{{ route('admin.profile.index') }}" 
+                       class="nav-link {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
                         <p>Profile</p>
                     </a>
                 </li>
-                --}}
-                <!-- Contacts -->
-                {{-- 
-                <li class="nav-item">
-                    <a href="{{ route('admin.cms.contact') }}" 
-                       class="nav-link {{ request()->routeIs('admin.cms.contact') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-address-book"></i>
-                        <p>Contacts</p>
-                    </a>
-                </li>
-                --}}
+                
                 <!-- Users -->
-                {{--  
                 <li class="nav-item">
                     <a href="{{ route('admin.user.index') }}" 
                        class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
@@ -47,8 +35,7 @@
                         <p>Users</p>
                     </a>
                 </li>
-                --}}
-
+                
                 <!-- Blogs -->
                 <li class="nav-item">
                     <a href="{{ route('admin.blog.index') }}" 

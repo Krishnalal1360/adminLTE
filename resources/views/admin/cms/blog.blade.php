@@ -37,7 +37,7 @@
                     <td>{{ $blog->title }}</td>
                     <td>{{ Str::limit(strip_tags($blog->description), 50) }}</td>
                     <td>
-                        <a href="{{ route('admin.cms.show', $blog->id) }}" class="btn btn-primary btn-sm">Read More</a>
+                        <a href="{{ route('cms.show', $blog->id) }}" class="btn btn-primary btn-sm">Read More</a>
                     </td>
                 </tr>
             @empty

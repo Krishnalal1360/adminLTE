@@ -7,91 +7,69 @@
 @section('title', 'Create Contact')
 
 @section('content')
-<form action="{{ route('admin.cms.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('cms.contact.store') }}" method="POST">
     @csrf
     <div class="card-body">
 
-        <!-- Contact Title -->
-        <div class="form-group">
-            <label for="contact_title">Title</label>
+        <!-- Name -->
+        <div class="form-group mb-3">
+            <label for="contact_name">Name</label>
             <input type="text"
-                   name="title"
-                   value="{{ old('title') }}"
-                   class="form-control @error('title') is-invalid @enderror"
-                   placeholder="Enter title" required>
-            @error('title') 
+                   name="name"
+                   value="{{ old('name') }}"
+                   class="form-control @error('name') is-invalid @enderror"
+                   placeholder="Enter name" required>
+            @error('name') 
                 <span class="invalid-feedback">{{ $message }}</span> 
             @enderror
         </div>
 
-        <!-- Contact Description -->
-        <div class="form-group">
-            <label for="contact_description">Description</label>
-            <textarea id="contact_description"
-                      name="description"
-                      class="form-control @error('description') is-invalid @enderror"
-                      placeholder="Enter description" required>{{ old('description') }}</textarea>
-            @error('description') 
+        <!-- Email -->
+        <div class="form-group mb-3">
+            <label for="contact_email">Email</label>
+            <input type="email"
+                   name="email"
+                   value="{{ old('email') }}"
+                   class="form-control @error('email') is-invalid @enderror"
+                   placeholder="Enter email" required>
+            @error('email') 
                 <span class="invalid-feedback">{{ $message }}</span> 
             @enderror
         </div>
 
-        <!-- Contact Image -->
-        <div class="form-group">
-            <label for="blog_image">Upload Image</label>
-            <input type="file"
-                   name="blog_image"
-                   id="blog_image"
-                   class="form-control @error('blog_image') is-invalid @enderror" required>
-
-            @error('blog_image') 
+        <!-- Password -->
+        <div class="form-group mb-3">
+            <label for="contact_password">Password</label>
+            <input type="password"
+                   name="password"
+                   class="form-control @error('password') is-invalid @enderror"
+                   placeholder="Enter password" required>
+            @error('password') 
                 <span class="invalid-feedback">{{ $message }}</span> 
             @enderror
+        </div>
 
-            <!-- Preview before uploading -->
-            <div class="mt-2">
-                <img id="preview_image" 
-                     src="#" 
-                     alt="Preview" 
-                     class="rounded shadow-sm d-none" 
-                     width="120" height="120"
-                     style="object-fit: cover; border: 2px solid #ddd;">
-            </div>
+        <!-- Message -->
+        <div class="form-group mb-3">
+            <label for="contact_message">Message</label>
+            <textarea id="contact_message"
+                      name="message"
+                      class="form-control @error('message') is-invalid @enderror"
+                      placeholder="Enter your message" required>{{ old('message') }}</textarea>
+            @error('message') 
+                <span class="invalid-feedback">{{ $message }}</span> 
+            @enderror
         </div>
 
     </div>
 
     <div class="card-footer">
         <button type="submit" class="btn btn-success">
-            <i class="fas fa-save"></i> Create
+            <i class="fas fa-save"></i> Submit
         </button>
-        <a href="{{ route('admin.cms.index') }}" class="btn btn-secondary ml-2">
+        <a href="{{ route('cms.index') }}" class="btn btn-secondary ml-2">
             Cancel
         </a>
     </div>
 </form>
 @endsection
-
-@push('scripts')
-<script>
-    $(function () {
-        $('#contact_description').summernote({
-            height: 200
-        });
-
-        // Image preview before uploading
-        $('#blog_image').on('change', function (event) {
-            let input = event.target;
-            if (input.files && input.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#preview_image')
-                        .attr('src', e.target.result)
-                        .removeClass('d-none');
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        });
-    });
-</script>
-@endpush

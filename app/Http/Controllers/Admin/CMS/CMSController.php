@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\CMS;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ContactRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
+//use Illuminate\Support\Facades\Hash;
 
 class CMSController extends Controller
 {
@@ -98,6 +100,36 @@ public function store(Request $request)
     }
 
     $errorMessage = $response->json('message') ?? 'Failed to create blog.';
+    return back()->withInput()->with('error', $errorMessage);
+}
+
+    /**
+     * Store Contact details via API
+    */
+
+/**
+ * Store Contact details via API
+ */
+public function contactStore(ContactRequest $request)
+{
+    $apiBase = rtrim(env('API_URL', config('app.url')), '/');
+
+    // send validated data to API
+    $response = Http::post($apiBase . '/api/cms/contact', [
+        'name'     => $request->name,
+        'email'    => $request->email,
+        //'password' => bcrypt($request->password), // hash password
+        //'password' => Hash::make($request->password),
+        'password' => $request->password,
+        'message'  => $request->message,
+    ]);
+    //
+    if ($response->successful()) {
+        return redirect()->route('cms.index')
+                         ->with('success', 'Contact created successfully!');
+    }
+    //
+    $errorMessage = $response->json('message') ?? 'Failed to create contact.';
     return back()->withInput()->with('error', $errorMessage);
 }
 

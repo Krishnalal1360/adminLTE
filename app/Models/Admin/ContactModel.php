@@ -11,7 +11,7 @@ class ContactModel extends Model
     //
     use HasFactory, Notifiable;
     //
-    protected $table = 'contact_models';
+    protected $table = 'contacts';
     //
     protected $fillable = [
         'name',

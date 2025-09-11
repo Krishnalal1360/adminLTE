@@ -57,7 +57,7 @@
 
     <div class="card-footer">
         <button type="submit" class="btn btn-success">
-            <i class="fas fa-save"></i> Create Blog
+            <i class="fas fa-save"></i> Create
         </button>
         <a href="{{ route('admin.blog.index') }}" class="btn btn-secondary ml-2">
             Cancel

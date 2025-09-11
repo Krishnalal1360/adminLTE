@@ -28,7 +28,7 @@ class ContactRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                'unique:contact_models,email' . ($contactId ? ',' . $contactId : ''),
+                'unique:contacts,email' . ($contactId ? ',' . $contactId : ''),
             ],
             'password' => [$this->isMethod('post') ? 'required' : 'nullable', 'string', 'min:6'],
             'message'  => ['required', 'string'],

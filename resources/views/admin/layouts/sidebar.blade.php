@@ -27,12 +27,12 @@
                     </a>
                 </li>
                 
-                <!-- Users -->
+                <!-- Contacts -->
                 <li class="nav-item">
-                    <a href="{{ route('admin.user.index') }}" 
-                       class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Users</p>
+                    <a href="{{ route('admin.contact.index') }}" 
+                       class="nav-link {{ request()->routeIs('admin.contact.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-address-book"></i>
+                        <p>Contacts</p>
                     </a>
                 </li>
                 

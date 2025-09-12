@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\CMS\CMSController;
 
 // Protected admin routes
 Route::middleware(['auth'])
@@ -22,36 +21,29 @@ Route::middleware(['auth'])
         Route::get('/profile', [ProfileController::class, 'index'])
             ->name('admin.profile.index');
 
-        // Edit profile
-        /*Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])
-            ->name('admin.profile.edit');*/
-
         Route::put('/profile/{id}/update', [ProfileController::class, 'update'])
             ->name('admin.profile.update');
 
         // -------------------
-        // User Routes
+        // Contact Routes
         // -------------------
-        Route::get('/user', [UserController::class, 'index'])
-            ->name('admin.user.index');
+        Route::get('/contact', [ContactController::class, 'index'])
+            ->name('admin.contact.index');
 
-        /*Route::get('/user/create', [UserController::class, 'create'])
-            ->name('admin.user.create');
+        Route::get('/contact/{id}', [ContactController::class, 'show'])
+            ->name('admin.contact.show');
 
-        Route::post('/user', [UserController::class, 'store'])
-            ->name('admin.user.store');*/
+        Route::get('/contact/{id}/edit', [ContactController::class, 'edit'])
+            ->name('admin.contact.edit');
 
-        Route::get('/user/{id}/edit', [UserController::class, 'edit'])
-            ->name('admin.user.edit');
+        Route::put('/contact/{id}', [ContactController::class, 'update'])
+            ->name('admin.contact.update');
 
-        Route::put('/user/{id}', [UserController::class, 'update'])
-            ->name('admin.user.update');
+        Route::delete('/contact/{id}', [ContactController::class, 'destroy'])
+            ->name('admin.contact.destroy');
 
-        Route::delete('/user/{id}', [UserController::class, 'destroy'])
-            ->name('admin.user.destroy');
-
-        Route::get('/user/export/{type}', [UserController::class, 'export'])
-            ->name('admin.user.export');
+        Route::get('/contact/export/{type}', [ContactController::class, 'export'])
+            ->name('admin.contact.export');
 
         // -------------------
         // Blog Routes
@@ -77,20 +69,3 @@ Route::middleware(['auth'])
         Route::get('/blog/export/{type}', [BlogController::class, 'export'])
             ->name('admin.blog.export');
     });
-        // -------------------
-        // CMS Routes
-        // -------------------
-        Route::get('/home', [CMSController::class, 'home'])
-            ->name('cms.home');
-
-        Route::get('/blogs', [CMSController::class, 'index'])
-            ->name('cms.index');
-
-        Route::get('/blog/{id}', [CMSController::class, 'show'])
-            ->name('cms.show');
-
-        Route::get('/contact', [CMSController::class, 'create'])
-            ->name('cms.contact.create');
-
-        Route::post('/contact-store', [CMSController::class, 'contactStore'])
-            ->name('cms.contact.store');

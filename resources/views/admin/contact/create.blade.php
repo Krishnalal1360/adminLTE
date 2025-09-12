@@ -31,21 +31,24 @@
             @enderror
         </div>
 
-        <!-- Password -->
+        <!-- Phone -->
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password"
-                   name="password"
-                   class="form-control @error('password') is-invalid @enderror"
-                   placeholder="Enter password">
-            @error('password') 
+            <label for="phone">Phone</label>
+            <input type="text"
+                   name="phone"
+                   value="{{ old('phone') }}"
+                   class="form-control @error('phone') is-invalid @enderror"
+                   placeholder="Enter phone number">
+            @error('phone') 
                 <span class="invalid-feedback">{{ $message }}</span> 
             @enderror
         </div>
 
+    </div>
+
     <div class="card-footer">
         <button type="submit" class="btn btn-success">
-            <i class="fas fa-save"></i> Create User
+            <i class="fas fa-save"></i> Create
         </button>
         <a href="{{ route('admin.user.index') }}" class="btn btn-secondary ml-2">
             Cancel

@@ -16,7 +16,7 @@
 <body class="hold-transition sidebar-mini">
 
 <div class="wrapper">
-    @include('admin.layouts.navbar')
+    @include('admin.layouts.header')
     @include('admin.layouts.sidebar')
 
     <!-- Main Content -->

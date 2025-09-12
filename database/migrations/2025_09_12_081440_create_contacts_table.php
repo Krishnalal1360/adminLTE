@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');              // contact name
             $table->string('email')->unique();   // email should be unique
-            $table->string('password');          // hashed password
+            $table->string('phone');          // phone number
             $table->text('message');             // message content
             $table->timestamps();                // created_at & updated_at
         });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\API;
+namespace App\Http\Controllers\Postman;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

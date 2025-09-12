@@ -8,19 +8,14 @@ use Illuminate\Notifications\Notifiable;
 
 class ContactModel extends Model
 {
-    //
     use HasFactory, Notifiable;
-    //
-    protected $table = 'contacts';
-    //
+
+    protected $table = 'contacts'; // make sure migration uses this table
+
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'phone',   // add this if you have phone column
         'message',
-    ];
-    //
-    protected $hidden = [
-        //'password',
     ];
 }

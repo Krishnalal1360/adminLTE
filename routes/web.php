@@ -3,11 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Load admin routes
+// Admin routes
 require __DIR__.'/admin.php';
 
 // Auth routes
 require __DIR__.'/auth.php';
+
+// Auth routes
+require __DIR__.'/cms.php';
 
 /**
  * Explicitly handle /admin as login OR redirect to dashboard

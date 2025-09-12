@@ -1,18 +1,19 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="content-wrapper">
+@php
+    $currentPage = 'blog';
+@endphp
 
-    <!-- Main Content -->
+<div class="content-wrapper" style="min-height: 80vh; padding: 20px 40px;">
+
     <section class="content">
         <div class="container-fluid">
-            
-            <div class="card card-primary">
+            <div class="card card-primary" style="width: 600px; margin-top: 30px;">
                 <div class="card-header">
-                    <h3 class="card-title">Blog Information</h3>
+                    <h3 class="card-title text-center w-100">Blog Details</h3>
                 </div>
 
-                <!-- Form Start -->
                 <form action="{{ route('admin.blog.update', $blogList->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -24,7 +25,7 @@
                             <input type="text"
                                    id="title"
                                    name="title"
-                                   value="{{ old('title', $blogList->title) }}"
+                                   value="{{ old('title', e($blogList->title)) }}"
                                    class="form-control @error('title') is-invalid @enderror"
                                    placeholder="Enter blog title">
                             @error('title')
@@ -38,17 +39,10 @@
                             <textarea name="description"
                                       id="blog_description"
                                       class="form-control @error('description') is-invalid @enderror"
-                                      rows="6">{{ old('description', $blogList->description) }}</textarea>
+                                      rows="5">{{ old('description', $blogList->description) }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
-
-                            <!-- Preview of formatted content -->
-                            @if($blogList->description)
-                                <div class="mt-2 p-2 border rounded bg-light">
-                                    {!! $blogList->description !!}
-                                </div>
-                            @endif
                         </div>
 
                         <!-- Blog Image -->
@@ -63,21 +57,19 @@
                             @enderror
 
                             <div class="mt-2">
-                                <!-- Existing uploaded image -->
                                 @if(!empty($blogList->file))
                                     <img src="{{ asset('storage/' . $blogList->file) }}"
                                          alt="Blog Image"
-                                         class="rounded-circle shadow-sm"
+                                         class="rounded shadow-sm"
                                          width="120"
                                          height="120"
                                          style="object-fit: cover; border: 2px solid #ddd;">
                                 @endif
 
-                                <!-- New upload preview -->
                                 <img id="preview_image"
                                      src="#"
                                      alt="Preview"
-                                     class="rounded-circle shadow-sm d-none mt-2"
+                                     class="rounded shadow-sm d-none mt-2"
                                      width="120"
                                      height="120"
                                      style="object-fit: cover; border: 2px solid #ddd;">
@@ -85,9 +77,9 @@
                         </div>
                     </div>
 
-                    <div class="card-footer">
+                    <div class="card-footer text-left">
                         <button type="submit" class="btn btn-success">
-                            <i class="fas fa-save"></i> Update Blog
+                            <i class="fas fa-save"></i> Update
                         </button>
                         <a href="{{ route('admin.blog.index') }}" class="btn btn-secondary ml-2">
                             Cancel
@@ -95,7 +87,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </section>
 </div>
@@ -105,7 +96,14 @@
 <script>
     $(function () {
         $('#blog_description').summernote({
-            height: 200
+            height: 200,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview']]
+            ]
         });
 
         // Image preview before uploading

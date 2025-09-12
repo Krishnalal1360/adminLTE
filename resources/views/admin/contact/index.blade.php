@@ -10,12 +10,16 @@
 @endsection
 
 @section('content')
+@php
+    use Illuminate\Support\Str;
+@endphp
+
     <!-- Page Header -->
     <section class="content-header">
         <div class="container-fluid px-3">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>User List</h1>
+                    <h1>Contact List</h1>
                 </div>
             </div>
         </div>
@@ -40,18 +44,20 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{{ route('admin.user.export', 'pdf') }}" class="btn btn-danger btn-sm">
+                        <a href="{{ route('admin.contact.export', 'pdf') }}" class="btn btn-danger btn-sm">
                             <i class="fas fa-file-pdf"></i> PDF
                         </a>
-                        <a href="{{ route('admin.user.export', 'excel') }}" class="btn btn-success btn-sm">
+                        <a href="{{ route('admin.contact.export', 'excel') }}" class="btn btn-success btn-sm">
                             <i class="fas fa-file-excel"></i> Excel
                         </a>
-                        <a href="{{ route('admin.user.export', 'csv') }}" class="btn btn-warning btn-sm text-white">
+                        <a href="{{ route('admin.contact.export', 'csv') }}" class="btn btn-warning btn-sm text-white">
                             <i class="fas fa-file-csv"></i> CSV
                         </a>
+                        {{-- 
                         <a href="{{ route('admin.user.export', 'print') }}" target="_blank" class="btn btn-secondary btn-sm">
                             <i class="fas fa-print"></i> Print
                         </a>
+                        --}}
                     </div>
                 </div>
 
@@ -62,7 +68,7 @@
                                 <th style="width: 60px;">#</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Password</th>
+                                <th>Phone</th>
                                 <th>Message</th>
                                 <th style="width: 150px;">Actions</th>
                             </tr>
@@ -74,14 +80,18 @@
                                 <td>{{ $i }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <!-- Show masked password since original can't be displayed -->
-                                <td>********</td> 
-                                <td>{{ $user->message ?? 'N/A' }}</td>
+                                <td>{{ $user->phone ?? 'N/A' }}</td>
                                 <td>
-                                    <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-info">
-                                        <i class="fas fa-edit"></i>
+                                    <span title="{{ $user->message ?? 'N/A' }}">
+                                        {{ Str::limit($user->message ?? 'N/A', 10) }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- View -->
+                                    <a href="{{ route('admin.contact.show', $user->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye"></i>
                                     </a>
-                                    <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
+                                    <form action="{{ route('admin.contact.destroy', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">

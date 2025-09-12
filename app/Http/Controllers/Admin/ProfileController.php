@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\ProfileRequest;
+use App\Models\Admin\UserModel;
 
 class ProfileController extends Controller
 {
@@ -15,40 +16,37 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $baseUrl = config('app.api_url');
 
-        // Call API to get profile
-        $response = Http::get("{$baseUrl}/api/admin/profile/{$user->id}");
-
-        if ($response->successful()) {
-            $userData = $response->json('data');
-            return view('admin.profile.index', [
-                'user' => (object) $userData
-            ]);
-        }
-
-        return back()->with('error', 'Unable to fetch profile.');
+        // Directly get user data from DB
+        return view('admin.profile.index', [
+            'user' => $user
+        ]);
     }
 
     /**
-     * Update profile via API.
+     * Update profile directly in DB.
      */
     public function update(ProfileRequest $request, string $id)
     {
-        $baseUrl = config('app.api_url');
+        $user = UserModel::findOrFail($id);
 
-        $response = Http::attach(
-            'image',
-            $request->file('image') ? fopen($request->file('image')->getPathname(), 'r') : null,
-            $request->file('image') ? $request->file('image')->getClientOriginalName() : null
-        )->put("{$baseUrl}/api/admin/profile/{$id}", $request->except(['image']));
+        $data = $request->validated();
 
-        if ($response->successful()) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('success', 'Admin Profile Updated!');
+        // Handle profile image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($user->image && Storage::disk('public')->exists($user->image)) {
+                Storage::disk('public')->delete($user->image);
+            }
+
+            // Store new image
+            $data['image'] = $request->file('image')->store('profiles', 'public');
         }
 
-        return back()->with('error', 'Unable to update profile.');
+        $user->update($data);
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('success', 'Admin Profile Updated!');
     }
 }

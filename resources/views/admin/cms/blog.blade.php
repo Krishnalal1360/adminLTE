@@ -34,8 +34,8 @@
                             <span class="text-muted">No Image</span>
                         @endif
                     </td>
-                    <td>{{ $blog->title }}</td>
-                    <td>{{ Str::limit(strip_tags($blog->description), 50) }}</td>
+                    <td>{{ Str::limit(strip_tags($blog->title), 5) }}</td>
+                    <td>{{ Str::limit(strip_tags($blog->description), 10) }}</td>
                     <td>
                         <a href="{{ route('cms.show', $blog->id) }}" class="btn btn-primary btn-sm">Read More</a>
                     </td>

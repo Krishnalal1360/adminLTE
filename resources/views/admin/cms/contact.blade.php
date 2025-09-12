@@ -7,6 +7,38 @@
 @section('title', 'Create Contact')
 
 @section('content')
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if(session('success'))
+    <script>
+        // Reload page after 3 seconds
+        setTimeout(function() {
+            window.location.reload();
+        }, 3000); // 3000ms = 3 seconds
+    </script>
+@endif
+
 <form action="{{ route('cms.contact.store') }}" method="POST">
     @csrf
     <div class="card-body">
@@ -37,14 +69,15 @@
             @enderror
         </div>
 
-        <!-- Password -->
+        <!-- Phone -->
         <div class="form-group mb-3">
-            <label for="contact_password">Password</label>
-            <input type="password"
-                   name="password"
-                   class="form-control @error('password') is-invalid @enderror"
-                   placeholder="Enter password" required>
-            @error('password') 
+            <label for="contact_phone">Phone</label>
+            <input type="text"
+                   name="phone"
+                   value="{{ old('phone') }}"
+                   class="form-control @error('phone') is-invalid @enderror"
+                   placeholder="Enter phone number" required>
+            @error('phone') 
                 <span class="invalid-feedback">{{ $message }}</span> 
             @enderror
         </div>

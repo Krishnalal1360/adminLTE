@@ -83,8 +83,8 @@ public function store(BlogRequest $request)
         //
         $blogList = BlogModel::findOrFail($id);
         //
-        $blogList->title = $request->title;
-        $blogList->description = $request->description;
+        $blogList->title = $request->title ?? $blogList->title;
+        $blogList->description = $request->description ?? $blogList->description;
         //
         if ($request->hasFile('blog_image')) {
             $filePath = $request->file('blog_image')->store('blogs', 'public');

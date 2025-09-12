@@ -69,7 +69,9 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                {{-- 
                                 <th>Message</th>
+                                --}}
                                 <th style="width: 150px;">Actions</th>
                             </tr>
                         </thead>
@@ -81,11 +83,13 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone ?? 'N/A' }}</td>
+                                {{-- 
                                 <td>
                                     <span title="{{ $user->message ?? 'N/A' }}">
                                         {{ Str::limit($user->message ?? 'N/A', 10) }}
                                     </span>
                                 </td>
+                                --}}
                                 <td>
                                     <!-- View -->
                                     <a href="{{ route('admin.contact.show', $user->id) }}" class="btn btn-sm btn-primary">

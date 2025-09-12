@@ -15,7 +15,9 @@
                 <th>#</th>
                 <th>Image</th>
                 <th>Title</th>
+                {{--  
                 <th>Description</th>
+                --}}
                 <th>Action</th>
             </tr>
         </thead>
@@ -35,7 +37,9 @@
                         @endif
                     </td>
                     <td>{{ Str::limit(strip_tags($blog->title), 5) }}</td>
+                    {{--  
                     <td>{{ Str::limit(strip_tags($blog->description), 10) }}</td>
+                    --}}
                     <td>
                         <a href="{{ route('cms.show', $blog->id) }}" class="btn btn-primary btn-sm">Read More</a>
                     </td>

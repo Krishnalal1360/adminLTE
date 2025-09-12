@@ -73,7 +73,9 @@
                         <tr>
                             <th style="width: 60px;">#</th>
                             <th>Title</th>
+                            {{--  
                             <th>Description</th>
+                            --}}
                             <th>Image</th>
                             <th style="width: 150px;">Actions</th>
                         </tr>
@@ -83,7 +85,9 @@
                         <tr>
                             <td>{{ $key + $blogLists->firstItem() }}</td>
                             <td>{{ $blog->title }}</td>
+                            {{--  
                             <td>{!! Str::limit(strip_tags($blog->description), 50) !!}</td>
+                            --}}
                             <td>
                                 @if(!empty($blog->file))
                                     <img src="{{ asset('storage/' . $blog->file) }}" 

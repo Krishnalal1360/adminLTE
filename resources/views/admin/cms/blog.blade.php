@@ -36,7 +36,10 @@
                             <span class="text-muted">No Image</span>
                         @endif
                     </td>
+                    <td>{{ $blog->title }}</td>
+                    {{-- 
                     <td>{{ Str::limit(strip_tags($blog->title), 5) }}</td>
+                    --}}
                     {{--  
                     <td>{{ Str::limit(strip_tags($blog->description), 10) }}</td>
                     --}}

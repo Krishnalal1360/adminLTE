@@ -1,21 +1,22 @@
 <?php
 
+// app/Models/Admin/ContactModel.php
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
 class ContactModel extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    protected $table = 'contacts'; // make sure migration uses this table
+    protected $table = 'contacts';
 
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',   // add this if you have phone column
-        'message',
-    ];
+    protected $fillable = ['name','email','phone','message','deadline'];
+
+    public function customNotifications()
+    {
+        return $this->hasMany(ContactNotification::class, 'contact_id');
+    }
 }
+
